@@ -1,0 +1,20 @@
+name: Deploy to Azure
+
+on:
+  push:
+    masteres: [master]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Deploy to Azure App Service
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'eira-maths-sats-helper'
+        publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
+        package: .
