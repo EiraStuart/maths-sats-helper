@@ -1,0 +1,75 @@
+⚡ QUICK START GUIDE ⚡
+
+═══════════════════════════════════════════════════════════════
+
+METHOD 1: SIMPLEST (Click & Open)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. Double-click: index.html
+2. Your browser opens automatically
+3. Start learning! 🎓
+
+═══════════════════════════════════════════════════════════════
+
+METHOD 2: FULL WEBSITE (With Server)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+If you have Python installed:
+→ Double-click: start-website.bat
+→ Browser opens to http://localhost:8080
+→ Perfect for sharing locally!
+
+If you have Node.js installed:
+→ Double-click: start-with-node.bat
+→ Browser opens automatically
+
+═══════════════════════════════════════════════════════════════
+
+SHARE WITH FRIENDS
+━━━━━━━━━━━━━━━━━
+
+1. Copy this entire folder
+2. Send to your friends
+3. They open index.html (or use the .bat files)
+4. Each person has their own progress! ✨
+
+═══════════════════════════════════════════════════════════════
+
+FEATURES
+━━━━━━━━
+
+✏️  30+ Practice Problems
+⏱️  Timed Quizzes
+🎮  4 Interactive Games
+📄  Past Papers (Standard & Greater Depth)
+📚  Topic Learning
+📊  Progress Tracking
+🏆  7 Achievements to Unlock
+💾  Saves offline automatically
+
+═══════════════════════════════════════════════════════════════
+
+TROUBLESHOOTING
+━━━━━━━━━━━━━━
+
+❌ "Python not found"
+→ Install Python from python.org
+→ Check "Add Python to PATH" during setup
+→ Restart and try again
+
+❌ Website won't open
+→ Try: Right-click index.html → Open with → Your browser
+→ Or copy this into your browser address bar:
+   file:///C:/Users/Home/maths-sats-helper/index.html
+
+❌ Games not working
+→ Make sure all 4 files are in the same folder:
+   - index.html
+   - styles.css
+   - script.js
+   - README.md
+
+═══════════════════════════════════════════════════════════════
+
+Need help? Just ask! 🚀
+
+Good luck with your SATs! 💪

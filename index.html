@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maths SATs Helper</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📐 Maths SATs Helper</h1>
+            <p>Master your maths with practice, quizzes, and tracking</p>
+        </header>
+
+        <nav class="navbar">
+            <button class="nav-btn active" data-section="home">Home</button>
+            <button class="nav-btn" data-section="practice">Practice</button>
+            <button class="nav-btn" data-section="quiz">Quiz</button>
+            <button class="nav-btn" data-section="games">Games</button>
+            <button class="nav-btn" data-section="pastpapers">Past Papers</button>
+            <button class="nav-btn" data-section="progress">Progress</button>
+            <button class="nav-btn" data-section="topics">Topics</button>
+        </nav>
+
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <div class="welcome-card">
+                <h2>Welcome! 👋</h2>
+                <p>Your personal maths SATs preparation companion. Choose what you'd like to do:</p>
+                <div class="quick-actions">
+                    <button class="action-btn" onclick="switchSection('practice')">
+                        <span class="icon">✏️</span>
+                        <span>Start Practicing</span>
+                    </button>
+                    <button class="action-btn" onclick="switchSection('quiz')">
+                        <span class="icon">⏱️</span>
+                        <span>Take a Quiz</span>
+                    </button>
+                    <button class="action-btn" onclick="switchSection('games')">
+                        <span class="icon">🎮</span>
+                        <span>Play Games</span>
+                    </button>
+                    <button class="action-btn" onclick="switchSection('pastpapers')">
+                        <span class="icon">📄</span>
+                        <span>Past Papers</span>
+                    </button>
+                    <button class="action-btn" onclick="switchSection('topics')">
+                        <span class="icon">📚</span>
+                        <span>Learn Topics</span>
+                    </button>
+                    <button class="action-btn" onclick="switchSection('progress')">
+                        <span class="icon">📊</span>
+                        <span>View Progress</span>
+                    </button>
+                </div>
+            </div>
+            <div class="stats-card">
+                <h3>Your Stats</h3>
+                <div class="stats-grid">
+                    <div class="stat">
+                        <div class="stat-value" id="totalProblems">0</div>
+                        <div class="stat-label">Problems Solved</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" id="accuracyPercent">0%</div>
+                        <div class="stat-label">Accuracy</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" id="bestStreak">0</div>
+                        <div class="stat-label">Best Streak</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Practice Section -->
+        <section id="practice" class="section">
+            <h2>Practice Problems</h2>
+            
+            <div class="practice-controls">
+                <div class="topic-selector">
+                    <div>
+                        <label for="topicSelect">Select Topic:</label>
+                        <select id="topicSelect" onchange="loadPracticeProblem()">
+                            <option value="">All Topics</option>
+                            <option value="algebra">Algebra</option>
+                            <option value="geometry">Geometry</option>
+                            <option value="ratio">Ratios & Proportions</option>
+                            <option value="statistics">Statistics</option>
+                            <option value="fractions">Fractions & Decimals</option>
+                            <option value="percentages">Percentages</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="difficultySelect">Difficulty:</label>
+                        <select id="difficultySelect" onchange="loadPracticeProblem()">
+                            <option value="">All Levels</option>
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Hard</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <button class="btn-secondary" onclick="toggleWeakSpotsMenu()">📍 Choose Weak Spots</button>
+            </div>
+            
+            <div id="weakSpotsMenu" class="weak-spots-menu hidden">
+                <h3>📍 What are your weak spots?</h3>
+                <p>Select topics you want to focus on. Leave blank to practice all.</p>
+                <div class="weak-spots-grid">
+                    <label class="weak-spot-checkbox">
+                        <input type="checkbox" id="ws-algebra" onchange="updateWeakSpots()">
+                        <span>Algebra</span>
+                    </label>
+                    <label class="weak-spot-checkbox">
+                        <input type="checkbox" id="ws-geometry" onchange="updateWeakSpots()">
+                        <span>Geometry</span>
+                    </label>
+                    <label class="weak-spot-checkbox">
+                        <input type="checkbox" id="ws-ratio" onchange="updateWeakSpots()">
+                        <span>Ratios & Proportions</span>
+                    </label>
+                    <label class="weak-spot-checkbox">
+                        <input type="checkbox" id="ws-statistics" onchange="updateWeakSpots()">
+                        <span>Statistics</span>
+                    </label>
+                    <label class="weak-spot-checkbox">
+                        <input type="checkbox" id="ws-fractions" onchange="updateWeakSpots()">
+                        <span>Fractions & Decimals</span>
+                    </label>
+                    <label class="weak-spot-checkbox">
+                        <input type="checkbox" id="ws-percentages" onchange="updateWeakSpots()">
+                        <span>Percentages</span>
+                    </label>
+                </div>
+                <div class="weak-spots-buttons">
+                    <button class="btn-primary" onclick="toggleWeakSpotsMenu()">Done</button>
+                    <button class="btn-secondary" onclick="clearWeakSpots()">Clear All</button>
+                </div>
+            </div>
+
+            <div id="problemContainer" class="problem-container">
+                <div class="problem-card">
+                    <div class="problem-header">
+                        <span id="problemCount">Problem 1</span>
+                        <span class="difficulty" id="difficultyBadge">Easy</span>
+                    </div>
+                    <div class="problem-question" id="problemQuestion">
+                        Click "Next Problem" to start!
+                    </div>
+                    <div id="stepExplanation" class="step-explanation hidden">
+                        <h4>Step-by-step solution:</h4>
+                        <div id="steps"></div>
+                    </div>
+                    <div class="answer-area">
+                        <input type="text" id="answerInput" placeholder="Enter your answer" 
+                               onkeypress="handleKeyPress(event)">
+                        <button class="btn-primary" onclick="submitAnswer()">Submit</button>
+                        <button class="btn-secondary" onclick="showSolution()">Show Solution</button>
+                    </div>
+                    <div id="feedback" class="feedback hidden"></div>
+                    <button id="practiceNextBtn" class="btn-primary" onclick="loadPracticeProblem()">Next Problem</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <section id="quiz" class="section">
+            <h2>Timed Quiz</h2>
+            <div class="quiz-setup">
+                <div class="setup-group">
+                    <label for="quizLength">Number of Questions:</label>
+                    <select id="quizLength">
+                        <option value="5">5 Questions</option>
+                        <option value="10" selected>10 Questions</option>
+                        <option value="15">15 Questions</option>
+                    </select>
+                </div>
+                <div class="setup-group">
+                    <label for="quizDifficulty">Difficulty:</label>
+                    <select id="quizDifficulty">
+                        <option value="easy">Easy</option>
+                        <option value="mixed" selected>Mixed</option>
+                        <option value="hard">Hard</option>
+                    </select>
+                </div>
+                <button class="btn-primary" onclick="startQuiz()">Start Quiz</button>
+            </div>
+
+            <div id="quizContainer" class="hidden">
+                <div class="quiz-header">
+                    <div class="quiz-progress">
+                        <span id="quizProgress">1 / 10</span>
+                        <div class="progress-bar">
+                            <div id="progressFill" class="progress-fill"></div>
+                        </div>
+                    </div>
+                    <div class="quiz-timer">
+                        <span id="timer">00:00</span>
+                    </div>
+                </div>
+                <div class="quiz-question" id="quizQuestion"></div>
+                <div class="quiz-options" id="quizOptions"></div>
+                <button id="quizNextBtn" class="btn-primary" onclick="nextQuizQuestion()">Next</button>
+                <button class="btn-secondary" onclick="endQuiz()">End Quiz</button>
+            </div>
+
+            <div id="quizResults" class="hidden">
+                <h3>Quiz Results</h3>
+                <div class="results-summary">
+                    <div class="result-item">
+                        <span class="result-label">Score:</span>
+                        <span class="result-value" id="quizScore">0/10</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Accuracy:</span>
+                        <span class="result-value" id="quizAccuracy">0%</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Time:</span>
+                        <span class="result-value" id="quizTime">00:00</span>
+                    </div>
+                </div>
+                <button class="btn-primary" onclick="retakeQuiz()">Retake Quiz</button>
+                <button class="btn-secondary" onclick="switchSection('home')">Back to Home</button>
+            </div>
+        </section>
+
+        <!-- Topics Section -->
+        <section id="topics" class="section">
+            <h2>Learning Topics</h2>
+            <div class="topics-grid">
+                <div class="topic-card" onclick="showTopicDetail('algebra')">
+                    <h3>Algebra</h3>
+                    <p>Equations, expressions, and variables</p>
+                    <span class="progress-small">2/5 learned</span>
+                </div>
+                <div class="topic-card" onclick="showTopicDetail('geometry')">
+                    <h3>Geometry</h3>
+                    <p>Shapes, angles, and spatial reasoning</p>
+                    <span class="progress-small">3/4 learned</span>
+                </div>
+                <div class="topic-card" onclick="showTopicDetail('ratio')">
+                    <h3>Ratios & Proportions</h3>
+                    <p>Comparing quantities and scaling</p>
+                    <span class="progress-small">1/3 learned</span>
+                </div>
+                <div class="topic-card" onclick="showTopicDetail('statistics')">
+                    <h3>Statistics</h3>
+                    <p>Data analysis and probability</p>
+                    <span class="progress-small">0/4 learned</span>
+                </div>
+                <div class="topic-card" onclick="showTopicDetail('fractions')">
+                    <h3>Fractions & Decimals</h3>
+                    <p>Working with parts and decimal numbers</p>
+                    <span class="progress-small">4/4 learned</span>
+                </div>
+                <div class="topic-card" onclick="showTopicDetail('percentages')">
+                    <h3>Percentages</h3>
+                    <p>Percentage calculations and applications</p>
+                    <span class="progress-small">2/3 learned</span>
+                </div>
+            </div>
+            <div id="topicDetail" class="hidden">
+                <button class="btn-secondary" onclick="hidTopicDetail()">← Back</button>
+                <div id="topicContent"></div>
+            </div>
+        </section>
+
+        <!-- Games Section -->
+        <section id="games" class="section">
+            <h2>🎮 Maths Games</h2>
+            <div class="games-grid">
+                <div class="game-card" onclick="startGame('mathbingo')">
+                    <h3>🎲 Math Bingo</h3>
+                    <p>Solve problems and mark off answers on your bingo card</p>
+                    <span class="game-badge">Quick & Fun</span>
+                </div>
+                <div class="game-card" onclick="startGame('speedround')">
+                    <h3>⚡ Speed Round</h3>
+                    <p>Answer as many problems as you can in 60 seconds!</p>
+                    <span class="game-badge">Timed Challenge</span>
+                </div>
+                <div class="game-card" onclick="startGame('numberchallenge')">
+                    <h3>🔢 Number Challenge</h3>
+                    <p>Guess the number by solving a series of clues</p>
+                    <span class="game-badge">Puzzle Time</span>
+                </div>
+                <div class="game-card" onclick="startGame('memorymath')">
+                    <h3>🧠 Memory Math</h3>
+                    <p>Remember answers and match them with problems</p>
+                    <span class="game-badge">Memory Game</span>
+                </div>
+            </div>
+
+            <div id="gameContainer" class="hidden">
+                <button class="btn-secondary" onclick="exitGame()">← Back to Games</button>
+                <div id="gameContent"></div>
+            </div>
+        </section>
+
+        <!-- Past Papers Section -->
+        <section id="pastpapers" class="section">
+            <h2>📄 Past Paper Questions</h2>
+            <div class="difficulty-filter">
+                <label>Filter by Difficulty:</label>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" onclick="filterPastPapers('', event)">All</button>
+                    <button class="filter-btn" onclick="filterPastPapers('ks2-standard', event)">KS2 Standard</button>
+                    <button class="filter-btn" onclick="filterPastPapers('ks2-greater', event)">KS2 Greater Depth</button>
+                </div>
+            </div>
+            
+            <div id="pastPapersContainer" class="problem-container">
+                <div class="problem-card">
+                    <div class="problem-header">
+                        <span id="ppProblemCount">Problem 1</span>
+                        <span class="difficulty" id="ppDifficultyBadge">KS2 Standard</span>
+                    </div>
+                    <div class="problem-question" id="ppQuestion">
+                        Click "Next Question" to start!
+                    </div>
+                    <div id="ppStepExplanation" class="step-explanation hidden">
+                        <h4>Step-by-step solution:</h4>
+                        <div id="ppSteps"></div>
+                    </div>
+                    <div class="answer-area">
+                        <input type="text" id="ppAnswerInput" placeholder="Enter your answer" 
+                               onkeypress="handleKeyPressPP(event)">
+                        <button class="btn-primary" onclick="submitPastPaperAnswer()">Submit</button>
+                        <button class="btn-secondary" onclick="showPastPaperSolution()">Show Solution</button>
+                    </div>
+                    <div id="ppFeedback" class="feedback hidden"></div>
+                    <button id="pastNextBtn" class="btn-primary" onclick="loadPastPaperQuestion()">Next Question</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Progress Section -->
+        <section id="progress" class="section">
+            <h2>Your Progress 🏆</h2>
+            
+            <div class="achievements-section">
+                <h3>🎖️ Achievements</h3>
+                <div class="achievements-grid" id="achievementsGrid"></div>
+            </div>
+
+            <div class="progress-overview">
+                <div class="progress-chart">
+                    <h3>Problems Solved by Topic</h3>
+                    <canvas id="progressChart"></canvas>
+                </div>
+                <div class="progress-stats">
+                    <h3>Overall Statistics</h3>
+                    <div class="stat-block">
+                        <div class="stat-row">
+                            <span>Total Problems:</span>
+                            <span id="totalProblems2">0</span>
+                        </div>
+                        <div class="stat-row">
+                            <span>Accuracy:</span>
+                            <span id="accuracy2">0%</span>
+                        </div>
+                        <div class="stat-row">
+                            <span>Quizzes Completed:</span>
+                            <span id="quizzesCompleted">0</span>
+                        </div>
+                        <div class="stat-row">
+                            <span>Best Topic:</span>
+                            <span id="bestTopic">N/A</span>
+                        </div>
+                    </div>
+                    <button class="btn-secondary" onclick="clearProgress()">Clear All Data</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
